@@ -3,6 +3,7 @@
 
 #################################################################################$$
 # Copyright (c) 2011-2014, Pacific Biosciences of California, Inc.
+# Copyright (c) 2019, Yoshihiko Suzuki
 #
 # All rights reserved.
 #
