@@ -62,3 +62,5 @@ Now you have matchings, which records the final result.
 
 
 ## License
+
+The original code of `modified_fc_ovlp_to_graph_unitig.py` and `modified_fc_ovlp_to_graph_contig.py` was developed by Pacific Biosciences and licensed as described in the files, and the modified codes retain the same license. The other codes developed by Yoshihiko Suzuki are licensed under MIT.
