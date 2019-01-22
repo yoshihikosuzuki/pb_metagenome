@@ -19,32 +19,45 @@ Slightly different scripts are used for generating initial unitigs (= conservati
 
 ## 3. Host bacteria prediction of extrachromosomal mobile genetic elements (eMGEs) using DNA methylation motifs (`methylation_matching/`)
 
-Prerequisites
-Before running HAMM, you must finish PacBio assembly and methylation calling using all contigs and reads, and also binning of the contigs into each putative bacterium and selection of contigs of mobile genetic elements (MGEs) you want to associate with bacteria.
+Before running the codes, one must finish PacBio assembly and methylation calling using all contigs and reads, and also binning of the contigs into each putative bacterium and selection of contigs of mobile genetic elements (MGEs) you want to associate with bacteria. Input files are as follows:
 
-Input files
-bins.fofn
-A file in which each line is a path to a multi-fasta file of contigs corresponding to a single bacterial genome
-mges.fofn
-Same format as bins.fofn but corresponding to MGEs
-modifications.gff, modifications.csv
-Output of SMRT pipe
-Simplest workflow
+* `bins.fofn`
+  * A file in which each line is a path to a multi-fasta file of contigs corresponding to a single bacterial genome
+* `mges.fofn`
+  * Same format as bins.fofn but corresponding to MGEs
+* `modifications.gff`, `modifications.csv`
+  * Output of SMRT pipe
+
 You have to specify some environment-dependent file paths as command-line options (see help by $ python <program> --help).
 
+```
 $ python3 binwise_motif_calling.py bins.fofn modifications.gff
+```
+
 Now you have a *.motif_summary.csv file for each bin in the directory same as that of the bin listed in bins.fofn.
 
+```
 $ find /root/of/*.motif_summary.csv -name "*.motif_summary.csv" > motifs.fofn
+```
+
 (Remove bins you want to exclude here.)
 
+```
 $ python3 aggregate_and_filter_motifs.py motifs.fofn
+```
+
 Now you have all.motifs and all.motifs.filtered files.
 
+```
 $ python3 calc_ipdr_matrix.py bins.fofn mges.fofn modifications.csv
+```
+
 You can parallelize the job using -n option. And now you have ipdr_matrix.csv.
 
+```
 $ python3 matching.py
+```
+
 Now you have matchings, which records the final result.
 
 
